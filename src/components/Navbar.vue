@@ -35,13 +35,13 @@
                 </li>
 
                 <li v-if="$store.state.isLoggedIn" class="nav-item">
-                    <router-link to="/tasks" class="nav-link" exact>
+                    <router-link to="/posts" class="nav-link" exact>
                             Tasks
                     </router-link>
                 </li>
 
                 <li class="nav-item">
-                    <router-link to="/lost&found" class="nav-link" exact>
+                    <router-link to="/posts" class="nav-link" exact>
                             Lost & Found
                     </router-link>
                 </li>
@@ -52,18 +52,18 @@
                     </router-link>
                 </li>
 
-                <li class="nav-item">
-                    <router-link to="/contact" class="nav-link" exact>
-                            Contact
-                    </router-link>
-                </li>
-
                 <li v-if="!$store.state.isLoggedIn" class="nav-item">
                     <router-link to="/login" class="nav-link" exact>
                             Login
                     </router-link>
                 </li>
 
+                <li class="nav-item">
+                    <router-link to="/contact" class="nav-link" exact>
+                            Contact
+                    </router-link>
+                </li>
+                
                 <li v-if="$store.state.isLoggedIn" class="nav-item">
                     <a @click.prevent="logout()" class="nav-link" href="#">
                             Logout
