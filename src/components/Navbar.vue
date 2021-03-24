@@ -34,12 +34,6 @@
                     </router-link>
                 </li>
 
-                <li v-if="$store.state.isLoggedIn" class="nav-item">
-                    <router-link to="/posts" class="nav-link" exact>
-                            Tasks
-                    </router-link>
-                </li>
-
                 <li class="nav-item">
                     <router-link to="/posts" class="nav-link" exact>
                             Lost & Found
@@ -58,21 +52,22 @@
                     </router-link>
                 </li>
 
+                <li v-if="$store.state.isLoggedIn" class="nav-item">
+                    <router-link to="/logout" class="nav-link" exact>
+                            Logout
+                    </router-link>
+                </li>
+
                 <li class="nav-item">
                     <router-link to="/contact" class="nav-link" exact>
                             Contact
                     </router-link>
                 </li>
                 
-                <li v-if="$store.state.isLoggedIn" class="nav-item">
-                    <a @click.prevent="logout()" class="nav-link" href="#">
-                            Logout
-                    </a>
-                </li>
 
                 <li class="nav-item">
                     <a class="nav-link" href="#">
-                            {{this.$store.state.username ? this.$store.state.username: 'User'}}
+                            {{this.$store.state.username ? this.$store.state.username: 'Guest'}}
 
                     </a>
                 </li>
@@ -85,15 +80,15 @@
 </template>
 
 <script>
-// import * as auth from '../services/AuthService'
+//import * as auth from '../services/AuthService'
 
 export default {
     name: 'Navbar',
-    methods: {
-        logout: function() {
-            // auth.logout();
-            this.$router.push({name: 'Home'});
-        }
-    }
+    // methods: {
+    //     logout: function() {
+    //         auth.logout();
+    //         this.$router.push({name: 'home'});
+    //     }
+    // }
 }
 </script>

@@ -2,29 +2,46 @@
   "name": "petshelter",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "scripts": {
     "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "build": "babel dev-server --out-dir prod-server && vue-cli-service build",
+    "lint": "vue-cli-service lint",
+    "dev1": "babel dev-server --out-dir prod-server --watch",
+    "dev": "concurrently \"babel dev-server --out-dir prod-server --watch\" \"nodemon prod-server/index.js\" \"npm run serve\"",
+    "poo": "concurrently --kill-others \"npm run build && npm run serve && npm run dev1\""
   },
   "dependencies": {
+    "axios": "^0.21.1",
+    "bcrypt": "^5.0.1",
+    "body-parser": "^1.19.0",
     "bootstrap": "^4.6.0",
+    "bootstrap-vue": "^2.21.2",
     "core-js": "^3.6.5",
     "jquery": "^3.6.0",
+    "jsonwebtoken": "^8.5.1",
+    "moment": "^2.29.1",
+    "mongoose": "^5.12.1",
     "popper.js": "^1.16.1",
     "vue": "^2.6.11",
     "vue-router": "^3.2.0",
     "vuex": "^3.4.0"
   },
   "devDependencies": {
+    "@babel/cli": "^7.13.10",
+    "@babel/core": "^7.13.10",
+    "@babel/preset-env": "^7.13.10",
     "@vue/cli-plugin-babel": "~4.5.0",
     "@vue/cli-plugin-eslint": "~4.5.0",
     "@vue/cli-plugin-router": "~4.5.0",
     "@vue/cli-plugin-vuex": "~4.5.0",
     "@vue/cli-service": "~4.5.0",
     "babel-eslint": "^10.1.0",
+    "concurrently": "^6.0.0",
+    "cors": "^2.8.5",
     "eslint": "^6.7.2",
     "eslint-plugin-vue": "^6.2.2",
+    "morgan": "^1.10.0",
     "vue-template-compiler": "^2.6.11"
   }
 }

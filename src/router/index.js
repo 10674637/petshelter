@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import Login from '../views/authentication/Login.vue'
+
 import Register from '../views/authentication/Register.vue'
 import Adoption from '../views/adoption/Adoption.vue'
 import Donation from '../views/donation/Donation.vue'
@@ -9,24 +10,15 @@ import PostsAll from '../views/postsLostAndFound/PostsAll.vue'
 import PostsCreate from '../views/postsLostAndFound/PostsCreate.vue'
 import PostsEdit from '../views/postsLostAndFound/PostsEdit.vue'
 import Contact from '../views/contact/Contact.vue'
-
+import * as auth from '../services/AuthService'
 
 Vue.use(VueRouter)
 
 const routes = [
   {
     path: '/',
-    name: 'Home',
+    name: 'home',
     component: Home
-  },
-
-  {
-    path: '/about',
-    name: 'About',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
   },
 
   {
@@ -38,31 +30,70 @@ const routes = [
   {
     path: '/posts/new',
     name: 'posts-create',
-    component: PostsCreate
+    component: PostsCreate,
+    beforeEnter: (to, from, next) => {
+      if (auth.isLoggedIn()){
+        next();
+      } else {
+        next('/login');
+      }
+    }
   },
 
   {
     path: '/posts/:id',
     name: 'posts-edit',
-    component: PostsEdit
+    component: PostsEdit,
+    beforeEnter: (to, from, next) => {
+      if (auth.isLoggedIn()){
+        next();
+      } else {
+        next('/login');
+      }
+    }
   },
 
   {
     path: '/register',
     name: 'register',
-    component: Register
+    component: Register,
+    beforeEnter: (to, from, next) => {
+      if (!auth.isLoggedIn()){
+        next();
+      } else {
+        next('/');
+      }
+    }
   },
 
   {
     path: '/login',
     name: 'login',
-    component: Login
+    component: Login,
+    beforeEnter: (to, from, next) => {
+      if (!auth.isLoggedIn()){
+        console.log("NEXT")
+        next();
+      } else {
+        console.log("slashes")
+        next('/');
+      }
+    }
   },
 
   {
     path: '/adoption',
     name: 'adoption',
     component: Adoption
+  },
+
+  {
+    path: '/logout',
+    name: 'logout',
+    beforeEnter: (to, from, next) => {
+      if (auth.isLoggedIn()) auth.logout();
+      next({ name: 'home', replace: from.name === 'home' });
+    }
   },
 
   {
@@ -85,7 +116,9 @@ const routes = [
 ]
 
 const router = new VueRouter({
-  routes
+  routes,
+  linkActiveClass: 'active',
+  mode: 'history',
 })
 
 export default router
