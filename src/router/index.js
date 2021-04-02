@@ -12,6 +12,9 @@ import PostsEdit from '../views/postsLostAndFound/PostsEdit.vue'
 import Contact from '../views/contact/Contact.vue'
 import * as auth from '../services/AuthService'
 
+import AllFoundPet from '../views/postsLostAndFound/AllFoundPets.vue'
+import AllLostPet from '../views/postsLostAndFound/AllLostPets.vue'
+
 Vue.use(VueRouter)
 
 const routes = [
@@ -25,6 +28,18 @@ const routes = [
     path: '/posts',
     name: 'posts-all',
     component: PostsAll
+  },
+
+  {
+    path: '/AllFoundPet',
+    name: 'AllFoundPet',
+    component: AllFoundPet
+  },
+
+  {
+    path: '/AllLostPet',
+    name: 'AllLostPet',
+    component: AllLostPet
   },
 
   {
