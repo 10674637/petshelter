@@ -7,7 +7,7 @@
     "serve": "vue-cli-service serve",
     "build": "babel dev-server --out-dir prod-server && vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "dev1": "babel dev-server --out-dir prod-server --watch",
+    "server:dev": "concurrently \"babel dev-server --out-dir prod-server --watch\" \"nodemon prod-server/index.js\"",
     "dev": "concurrently \"babel dev-server --out-dir prod-server --watch\" \"nodemon prod-server/index.js\" \"npm run serve\"",
     "poo": "concurrently --kill-others \"npm run build && npm run serve && npm run dev1\""
   },
