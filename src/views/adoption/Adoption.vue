@@ -9,6 +9,63 @@
         </div>
 
         <div class="row row-cols-1 row-cols-md-3 g-4">
+
+            <div class="col" v-for="item in  AllAdoption" :key="item._id">
+                <div class="card h-100">
+                <div class="btn-group" role="group">
+                    <button
+                        v-show="
+                        $store.state.isLoggedIn && item.author == $store.state.userId
+                        "
+                        type="button"
+                        aria-label="Close"
+                        class="close"
+                        title="Delete"
+                        @click="onDelete(item._id)"
+                    >
+                    <i class="fa fa-trash"></i>
+                    </button>
+                    <!-- <button
+                    v-show="
+                    $store.state.isLoggedIn && item.author == $store.state.userId
+                    "
+                    type="button"
+                    aria-label="Close"
+                    class="close"
+                    title="Update"
+                    @click="onUpdate(item._id)"
+                    >
+                    <i class="fa fa-pencil-alt"></i>
+                    </button> -->
+                
+                </div>
+                
+                
+                <img
+                    v-show="item.image"
+                    :src="item.image"
+                    class="card-img-top"
+                    alt="..."
+                />
+                <div class="card-body">
+                    <!-- <h5 class="card-title" style="color: black">Name: Benny</h5> -->
+                    <p style="color: black">
+                    Description: <br />
+                    {{ item.desc }}
+                    </p>
+                    <p style="color: black">
+                    Fee: <br />
+                    {{ item.fee }}
+                    </p>
+                </div>
+                
+                </div>
+        </div>
+
+
+
+
+
             
             <div v-if="$store.state.isLoggedIn" class="col">
                 <form @submit.prevent="saveData" ref="Form">
@@ -92,7 +149,7 @@
     </div>
 </template>
 <script>
-  import {createAdoption, getAllAdoption} from "../../services/AdoptionService";
+  import {createAdoption, getAllAdoption,deleteAdoptionById} from "../../services/AdoptionService";
   export default {
   name: "Adoption",
   data() {
@@ -136,11 +193,26 @@
        this.AdoptionObj.image= null;
       this.$refs.Form.reset();
     },
+    async onUpdate(){
+
+    },
+    async onDelete(id) {
+      let result = await deleteAdoptionById(id);
+      console.log('I am here with delete results',result);
+      if (result.status == 200) {
+        alert(result.data.message);
+        this.getData();
+      }
+    },
     
+  },
+   mounted() {
+    this.getData();
   },
 
 }
 </script>
+ 
 
 <style scoped>
 

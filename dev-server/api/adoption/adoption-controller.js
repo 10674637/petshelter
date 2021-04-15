@@ -44,3 +44,16 @@ export function showAll(req, res) {
     });
   });
 }
+
+//delete by from datase
+export function remove(req, res) {
+  adoption.deleteOne({
+      _id: req.params.id
+    }, function (error) {
+      if (error) {
+        return res.status(500).json();
+      }
+
+      return res.status(200).json({message:"Deleted successfully!"});
+    }); 
+}
