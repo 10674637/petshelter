@@ -2,6 +2,10 @@ import express from "express";
 import morgan from "morgan";
 import cors from "cors";
 import bodyParser from "body-parser";
+import path from 'path';
+import url from 'url';
+
+const __dirname = path.dirname(url.fileURLToPath(import.meta.url));
 
 export function setEnviroment(app){
     if(process.env.NODE_ENV != 'production'){
@@ -22,5 +26,6 @@ function setProEnv(app){
     process.env.DB_URL = 'mongodb+srv://petshelter:12345@petshelter.ghiyp.mongodb.net/myFirstDatabase?retryWrites=true&w=majority';
     process.env.TOKEN_SECRET = 'my-production-secret';
     app.use(bodyParser.json())
-    app.use(express.static(__dirname + '/../../dist'));
+    app.use(morgan('combined'))
+    app.use(express.static(path.join(__dirname, '..', '..', 'dist')));
 }
