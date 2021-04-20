@@ -12,7 +12,7 @@
 
             <div class="col" v-for="item in  AllAdoption" :key="item._id">
                 <div class="card h-100">
-                <div class="btn-group" role="group">
+            
                     <button
                         v-show="
                         $store.state.isLoggedIn && item.author == $store.state.userId
@@ -23,22 +23,10 @@
                         title="Delete"
                         @click="onDelete(item._id)"
                     >
-                    <i class="fa fa-trash"></i>
+                    x
                     </button>
-                    <!-- <button
-                    v-show="
-                    $store.state.isLoggedIn && item.author == $store.state.userId
-                    "
-                    type="button"
-                    aria-label="Close"
-                    class="close"
-                    title="Update"
-                    @click="onUpdate(item._id)"
-                    >
-                    <i class="fa fa-pencil-alt"></i>
-                    </button> -->
-                
-                </div>
+
+          
                 
                 
                 <img
@@ -63,7 +51,8 @@
         </div>
 
 
-
+        <!-- Need to figure a way of telling if the card is a 4th card we need another row
+         to create the space between the first and second row. -->
 
 
             
@@ -215,13 +204,23 @@
  
 
 <style scoped>
-
 .btn {
-    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
-    width: 250px;
-    border-radius: 12px;
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  width: 250px;
+  border-radius: 12px;
 }
-.form-control{
-    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+.form-control {
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.close {
+  float: right;
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 1;
+  color: #000;
+  text-shadow: 0 1px 0 #fff;
+  opacity: 0.5;
+  padding: 1.8rem;
+  margin: -1rem -1rem -1rem auto;
 }
 </style>
