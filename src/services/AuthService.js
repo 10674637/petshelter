@@ -46,6 +46,14 @@ export function getUserId() {
     return token.user.id;
 }
 
+export function getUserRole() {
+    const token = decodeToken();
+    if (!token) {
+        return null;
+    }
+    return token.user.role;
+}
+
 export function registerUser(user) {
     return http().post('/register', user);
 }

@@ -6,7 +6,7 @@
   background-color: rgb(221, 165, 82);
 }
 nav.navbar {
-  height: 7rem;
+  height: 4rem;
 }
 
 a.navbar-brand {
@@ -32,9 +32,9 @@ li.nav-item a {
 
 div#app-container {
   position: fixed;
-  top: 96px;
+  top: 64px;
   left: 0;
-  bottom: 96px;
+  bottom: 32px;
   width: 100%;
   padding: 2rem;
   background-color: #1d2733;
@@ -42,7 +42,8 @@ div#app-container {
 }
 
 footer#custom-footer {
-  height: 6rem;
+  /* height: 6rem; */
+  height: 2rem;
   /* background-color: #373f46; */
   background-color: rgb(221, 165, 82);
   font-size: 0.8rem;
@@ -127,5 +128,19 @@ form.custom-form {
   }
 }
 
+strong,option{
+  color: black;
+  text-align: justify;
 
+}
+
+.card-body>p{
+  margin-bottom: 4px;
+}
+
+
+.img-card{
+    height:250px;
+    width:100%;
+}
 

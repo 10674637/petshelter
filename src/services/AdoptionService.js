@@ -17,6 +17,13 @@ export function deleteAdoptionById(id) {
     return http().delete(`/adoption/${id}`);
 }
 
+export function search(filter) {
+    return http().post(`/adoption/search`,filter);
+}
+
+export function updateAdoption(Adoption) {
+    return http().put(`/adoption`,Adoption);
+}
 // export function updateTask(LostFound) {
 //     return http().put('/lost-found', LostFound);
 // }

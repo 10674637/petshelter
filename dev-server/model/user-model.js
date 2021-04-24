@@ -6,7 +6,8 @@ const userSchema = new mongoose.Schema({
     username: String,
     first: String,
     last: String,
-    password: String
+    password: String,
+    role: String
 });
 userSchema.set('timestamps', true);
 
