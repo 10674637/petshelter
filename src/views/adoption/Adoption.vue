@@ -333,7 +333,7 @@ export default {
       let result = await updateAdoption(data);
       if (result.status == 200) {
         alert(result.data.message);
-        this.getData();
+        // this.getData();
       }
       this.clearEditObj();
     },

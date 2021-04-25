@@ -1,12 +1,12 @@
 <template>
   <div>
-    <div class="jumbotron custom-bg-dark">
+    <!-- <div class="jumbotron custom-bg-dark">
       <h3>
-        Please give us a call for vaccination information and other questions.
+        Search Below for lost and found Animals
         <br />
-        (801) 359-0990
+       
       </h3>
-    </div>
+    </div> -->
 
   <!--start - lost found pet form modal --> 
   <b-modal id="bv-modal-example-lostfound-add" no-close-on-backdrop hide-header-close hide-footer>
@@ -183,7 +183,7 @@
           <div>
             <Search :isLostFound="true" @change="onSearchClick($event)"  style="width: 100%" />
           </div>
-          <div  v-if="$store.state.role == 'admin'">
+          <div  v-if="$store.state.login == isLoggedIn">
             <b-button id="show-btn" @click="$bvModal.show('bv-modal-example-lostfound-add')">Add Pet</b-button>
           </div>
         </div>
