@@ -4,7 +4,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "start": "cross-env NODE_ENV=production PORT=80 node prod-server/index.js",
+    "start": "cross-env NODE_ENV=production node prod-server/index.js",
     "serve": "vue-cli-service serve",
     "build": "npm run build:server && npm run build:client",
     "build:server": "babel dev-server --out-dir prod-server",
