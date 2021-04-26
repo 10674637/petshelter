@@ -1,13 +1,5 @@
 <template>
   <div>
-    <!-- <div class="jumbotron custom-bg-dark">
-      <h3>
-        Search Below for lost and found Animals
-        <br />
-       
-      </h3>
-    </div> -->
-
   <!--start - lost found pet form modal --> 
   <b-modal id="bv-modal-example-lostfound-add" no-close-on-backdrop hide-header-close hide-footer>
     <template #modal-title>
@@ -183,7 +175,7 @@
           <div>
             <Search :isLostFound="true" @change="onSearchClick($event)"  style="width: 100%" />
           </div>
-          <div  v-if="$store.state.login == isLoggedIn">
+          <div  v-if="$store.state.isLoggedIn">
             <b-button id="show-btn" @click="$bvModal.show('bv-modal-example-lostfound-add')">Add Pet</b-button>
           </div>
         </div>
@@ -429,7 +421,7 @@ export default {
 </script>
 
 <style scoped>
-.card-title:hover {
+/* .card-title:hover {
   box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   width: 100%;
   border-radius: 12px;
@@ -461,14 +453,9 @@ export default {
 
 .close { 
   float: right;
-  /* font-size: 1.5rem;
-  font-weight: 700; */
-  /* line-height: 1; */
   color: #000;
   text-shadow: 0 1px 0 #fff;
   opacity: 0.5;
-  /* padding: 1em; */
-  /* margin: -1rem -1rem -1rem auto; */  
 }
 
 .button-group{
@@ -502,6 +489,6 @@ button>i{
   display: flex;
   flex-wrap: wrap;
 }
-
+ */
 
 </style>
