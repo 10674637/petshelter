@@ -1,6 +1,8 @@
 import express from 'express'
 import bodyParser from 'body-parser';
 import path from 'path'
+import { fileURLToPath } from 'url'
+const __dirname = dirname(fileURLToPath(import.meta.url));
 
 var app = express();
 app.use(bodyParser.json({ limit: "50mb" }))
@@ -25,6 +27,7 @@ app.route('/*').get((req, res) => {
   }
   else {
     return res.sendFile(path.join(__dirname + '/../dist/index.html'))
+
   }
 })
 
