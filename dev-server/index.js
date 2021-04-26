@@ -1,5 +1,6 @@
 import express from 'express'
 import bodyParser from 'body-parser';
+import path from 'path'
 var app = express();
 app.use(bodyParser.json({ limit: "50mb" }))
 app.use(bodyParser.urlencoded({ limit: "50mb", extended: true, parameterLimit: 50000 }))
@@ -19,6 +20,9 @@ if (process.env.NODE_ENV !== 'production') {
       'Running server in development mode.'
     )
   })
+}
+else {
+  return res.sendFile(path.join(__dirname + '/../dist/index.html'))
 }
 
 app.listen(port, () => {
