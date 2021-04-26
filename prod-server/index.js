@@ -1,5 +1,6 @@
 import express from 'express';
 import bodyParser from 'body-parser';
+import path from 'path';
 var app = express();
 app.use(bodyParser.json({
   limit: "50mb"
@@ -16,13 +17,15 @@ import { connectToDB } from './config/db.js';
 setEnviroment(app);
 connectToDB();
 registerRoutes(app);
-
-if (process.env.NODE_ENV !== 'production') {
-  app.get('/', function (req, res) {
-    return res.send('Running server in development mode.');
-  });
-}
-
+app.route('/*').get(function (req, res) {
+  if (process.env.NODE_ENV !== 'production') {
+    app.get('/', function (req, res) {
+      return res.send('Running server in development mode.');
+    });
+  } else {
+    return res.sendFile(path.join(__dirname + '/../dist/index.html'));
+  }
+});
 app.listen(port, function () {
   console.log("Trang MEVN app listening at http://localhost:".concat(port, " in ") + process.env.NODE_ENV + 'model!');
 });
