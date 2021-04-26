@@ -1,13 +1,12 @@
 <template>
   <div>
-    <div class="jumbotron custom-bg-dark">
+    <div class=" custom-bg-dark">
       <h3>
         Please give us a call for adoption.
         <br />
         (801) 359-0990
       </h3>
     </div>
-
     <!--start - lost found pet form modal -->
     <b-modal
       id="bv-modal-example-adoption-add"
@@ -153,7 +152,6 @@
       </div>
     </div>
     <!-- end-Search components -->
-
     <div class="row row-cols-1 row-cols-md-3 g-4">
       <div class="col margin" v-for="item in AllAdoption" :key="item._id">
         <div class="card h-100 padding">
@@ -161,8 +159,8 @@
             <button
               v-show="
                 $store.state.isLoggedIn &&
-                (item.author == $store.state.userId ||
-                  $store.state.role == 'admin')
+                  (item.author == $store.state.userId ||
+                    $store.state.role == 'admin')
               "
               type="button"
               aria-label="Edit"
@@ -175,8 +173,8 @@
             <button
               v-show="
                 $store.state.isLoggedIn &&
-                (item.author == $store.state.userId ||
-                  $store.state.role == 'admin')
+                  (item.author == $store.state.userId ||
+                    $store.state.role == 'admin')
               "
               type="button"
               aria-label="Close"
@@ -196,29 +194,26 @@
           />
           <hr />
           <div class="card-body">
-            <!-- <h5 class="card-title" style="color: black">Name: Benny</h5> -->
-            <p style="color: black">
+            
+            <p>
               <strong>Description:</strong>
               {{ item.desc }}
             </p>
-            <p style="color: black">
+            <p>
               <strong>Fee:</strong>
               {{ item.fee }}
             </p>
-            <p style="color: black">
+            <p>
               <strong>Pet Type:</strong>
               {{ item.petType }}
             </p>
-            <p style="color: black">
+            <p>
               <strong>Location:</strong>
               {{ item.location }}
             </p>
           </div>
         </div>
       </div>
-
-      <!-- Need to figure a way of telling if the card is a 4th card we need another row
-         to create the space between the first and second row. -->
     </div>
     <!-- start - Adoption Edit modal -->
     <AdoptionEdit
@@ -360,10 +355,9 @@ export default {
   },
 };
 </script>
- 
 
 <style scoped>
-.padding {
+/* .padding {
   padding: 1em;
 }
 .margin {
@@ -389,14 +383,9 @@ export default {
 
 .close {
   float: right;
-  /* font-size: 1.5rem;
-  font-weight: 700; */
-  /* line-height: 1; */
   color: #000;
   text-shadow: 0 1px 0 #fff;
   opacity: 0.5;
-  /* padding: 1em; */
-  /* margin: -1rem -1rem -1rem auto; */
 }
 button-group {
   display: flex;
@@ -425,5 +414,5 @@ button-group {
 .flex-container {
   display: flex;
   flex-wrap: wrap;
-}
+} */
 </style>

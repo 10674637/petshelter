@@ -213,3 +213,6 @@ button>i{
   flex-wrap: wrap;
 }
  
+.card-body>p{
+  color: black
+}
