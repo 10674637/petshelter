@@ -1,6 +1,10 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import path from 'path';
+import { fileURLToPath } from 'url';
+
+var __dirname = dirname(fileURLToPath(import.meta.url));
+
 var app = express();
 app.use(bodyParser.json({
   limit: "50mb"
