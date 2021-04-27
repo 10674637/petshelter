@@ -1,12 +1,5 @@
 <template>
   <div>
-    <div class=" custom-bg-dark">
-      <h3>
-        Please give us a call for adoption.
-        <br />
-        (801) 359-0990
-      </h3>
-    </div>
     <!--start - lost found pet form modal -->
     <b-modal
       id="bv-modal-example-adoption-add"
