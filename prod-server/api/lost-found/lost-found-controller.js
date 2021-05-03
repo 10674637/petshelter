@@ -91,6 +91,8 @@ export function show(req, res) {
     return res.status(200).json({
       lostFound: lostFound
     });
+  }).sort({
+    createdAt: -1
   });
 }
 export function search(req, res) {
@@ -99,10 +101,27 @@ export function search(req, res) {
       $regex: req.body.petType,
       $options: "i"
     },
-    location: {
-      $regex: req.body.location,
-      $options: "i"
-    },
+    $or: [{
+      location: {
+        $regex: req.body.search,
+        $options: "i"
+      }
+    }, {
+      desc: {
+        $regex: req.body.search,
+        $options: "i"
+      }
+    }, {
+      personName: {
+        $regex: req.body.search,
+        $options: "i"
+      }
+    }, {
+      petType: {
+        $regex: req.body.search,
+        $options: "i"
+      }
+    }],
     type: {
       $in: req.body.type
     }
@@ -117,6 +136,8 @@ export function search(req, res) {
     return res.status(200).json({
       lostFound: lostFound
     });
+  }).sort({
+    createdAt: req.body.sort
   });
 }
 export function update(req, res) {

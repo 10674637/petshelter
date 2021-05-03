@@ -68,15 +68,6 @@
                         <b-form-select id="inputPetType" v-model="AdoptionObj.petType" :options="petOptions"></b-form-select>                
                     </div>
                     <br>
-                    
-                    <!-- <button 
-                        class="btn btn-outline-secondary" 
-                        type="button" 
-                        id="adopInputGroupSummit"
-                        @click="onUpdateClick"
-                    >
-                    Upload
-                    </button> -->
                     </div>
                     <div class="button-group">  
     <b-button class="mt-3" block @click="onCancelClick">Cancel</b-button>

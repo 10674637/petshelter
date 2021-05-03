@@ -206,6 +206,7 @@
     <div class="row row-cols-1 row-cols-md-3 g-4">
       <div class="col margin" v-for="item in AllPosts" :key="item._id">
         <div class="card h-100 padding">
+          <span class="thedate">{{ convert(item.createdAt) }}</span>
           <div class="icon-button-group">
             <b-badge
               style="width: 50px;
@@ -292,6 +293,7 @@
 
 <script>
 import Search from "../../components/Search.vue";
+import moment from "moment";
 import LostFoundEdit from "../../components/LostFoundEdit.vue";
 import {
   createLostFound,
@@ -339,6 +341,9 @@ export default {
     LostFoundEdit,
   },
   methods: {
+    convert(uploadDate){
+      return moment(uploadDate).format('MM/DD/YYYY HH:mm ')
+    },
     async toBase64(file) {
       const options = {
         maxSizeMB: 1,
@@ -365,7 +370,7 @@ export default {
         this.$bvModal.hide("bv-modal-example-lostfound-add");
         this.onSearchClick({
           petType: "-",
-          location: "",
+          search: "",
           isShowLost: true,
           isShowFound: true,
         });
@@ -386,10 +391,15 @@ export default {
       if (value.isShowLost) type.push(1);
       if (value.isShowFound) type.push(2);
 
+      var sortType = 1;
+      if(value.sort == 'desc')
+      {sortType = -1;}
+
       let obj = {
         petType: value.petType == "-" ? "" : value.petType,
-        location: value.location,
+        search: value.search,
         type: type,
+        sort: sortType
       };
       console.log(obj);
       let result = await search(obj);
@@ -406,7 +416,7 @@ export default {
         alert(result.data.message);
         this.onSearchClick({
           petType: "-",
-          location: "",
+          search: "",
           isShowLost: true,
           isShowFound: true,
         });
@@ -431,7 +441,7 @@ export default {
         alert(result.data.message);
         this.onSearchClick({
           petType: "-",
-          location: "",
+          search: "",
           isShowLost: true,
           isShowFound: true,
         });
@@ -441,7 +451,7 @@ export default {
   mounted() {
     this.onSearchClick({
       petType: "-",
-      location: "",
+      search: "",
       isShowLost: true,
       isShowFound: true,
     });
@@ -449,74 +459,4 @@ export default {
 };
 </script>
 
-<style scoped>
-/* .card-title:hover {
-  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-  width: 100%;
-  border-radius: 12px;
-}
-.btn {
-  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-  width: 250px;
-  border-radius: 12px;
-}
-.form-control {
-  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-}
-
-
-.padding{
-  padding:1em;
-}
-.margin{  
-  margin-top: 1em;
-  margin-bottom: 1em;
-}
-.form-card{
-      margin: 0 auto; 
-      text-align: center; 
-      position: relative;
-      top: 10%;
-      padding:1em
-}
-
-.close { 
-  float: right;
-  color: #000;
-  text-shadow: 0 1px 0 #fff;
-  opacity: 0.5;
-}
-
-.button-group{
-  display: flex;
-  flex-direction: row;
-}
-
-.icon-button-group{
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-end;
-}
-
-.icon-button-group>
-button{
-  margin-top: 5px;
-  margin-bottom: 5px;
-  margin-left: 10px;
-  margin-right: 10px;  
-  
-}
-.icon-button-group>
-button>i{
-  color:#6c757d !important;   
-}
-.button-group>button{
-  margin: 1em;  
-}
-
-.flex-container{
-  display: flex;
-  flex-wrap: wrap;
-}
- */
-</style>
+ 

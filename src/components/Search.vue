@@ -5,18 +5,19 @@
                 <label for="petType">Animal Type </label>
              </div>
              <div>
-                <b-form-select id="petType" v-model="res.petType" :options="options"></b-form-select>                
+                <b-form-select id="petType" v-on:change="$emit('change', res)" v-model="res.petType" v-bind:options="options"></b-form-select>               
             </div>                 
+            <!-- <div>     
+                <label for="location">Search: </label>
+            </div>      -->
             <div>     
-                <label for="location">Location (City) </label>
-            </div>     
-            <div>     
-                <b-form-input type="search" v-model="res.location" placeholder="location"></b-form-input>                
+                <b-form-input type="search" v-on:keyup="$emit('change', res)" v-model="res.search" placeholder="Search"></b-form-input>                
             </div>             
             <div v-show="isLostFound" class="flex-container">
                 <div>
                     <b-form-checkbox
                     id="showLost"
+                    v-on:change="$emit('change', res)"
                     v-model="res.isShowLost"
                     name="showLost"                                
                     >                
@@ -27,16 +28,28 @@
                 <div>
                     <b-form-checkbox
                     id="showFound"
+                    v-on:change="$emit('change', res)"
                     v-model="res.isShowFound"
-                    name="showFound"                                 
+                    name="showFound"
+                                                    
                     >                
                     Found
                     </b-form-checkbox>                
                 </div>
             </div>
-            <div>
+            <!-- <div>
                 <b-button size="md" @click="$emit('change', res)" >Search</b-button>
+            </div> -->
+            <div>
+                <input type="radio" id="asc" value="asc"  v-on:change="$emit('change', res)" v-model="res.sort">
+                <label for="asc">ASC</label>
+                <input type="radio" id="desc" value="desc"  v-on:change="$emit('change', res)" v-model="res.sort">
+                <label for="desc">DESC</label>
+                <br>
             </div>
+            
+
+
         </div>
         
      </b-container>
@@ -54,7 +67,7 @@ select,option,input {
   flex-wrap: wrap;  
   border-radius: 0.3rem;
   margin-bottom: 2rem;
-    border: 2px solid white;
+  border: 2px solid white;
 }
 
 .flex-container > div {    
@@ -83,9 +96,10 @@ export default {
 
             res:{
             petType:"-",
-            location:"",
+            search:"",
             isShowLost:true,
             isShowFound:true,
+            sort:'asc'
             }
             
         };

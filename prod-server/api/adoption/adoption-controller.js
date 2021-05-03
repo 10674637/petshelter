@@ -50,6 +50,8 @@ export function showAll(req, res) {
     return res.status(200).json({
       adoption: adoption
     });
+  }).sort({
+    createdAt: 1
   });
 } //delete by from datase
 
@@ -72,10 +74,22 @@ export function search(req, res) {
       $regex: req.body.petType,
       $options: "i"
     },
-    location: {
-      $regex: req.body.location,
-      $options: "i"
-    }
+    $or: [{
+      location: {
+        $regex: req.body.search,
+        $options: "i"
+      }
+    }, {
+      desc: {
+        $regex: req.body.search,
+        $options: "i"
+      }
+    }, {
+      petType: {
+        $regex: req.body.search,
+        $options: "i"
+      }
+    }]
   };
   adoption.find(query, function (error, adoption) {
     if (error) {
@@ -87,6 +101,8 @@ export function search(req, res) {
     return res.status(200).json({
       adoption: adoption
     });
+  }).sort({
+    createdAt: req.body.sort
   });
 }
 export function update(req, res) {

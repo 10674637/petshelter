@@ -2,7 +2,7 @@ import lostFound from "../../model/lost-found-model.js";
 import * as auth from "../../services/auth-service.js";
 export function index(req, res) {
   //find all pets
-  lostFound.find(function(error, data) {
+  lostFound.find(function (error, data) {
     if (error) {
       return res.status(500).json();
     }
@@ -21,7 +21,7 @@ export function getByType(req, res) {
   //find all post by type
   //Lost = 1
   //Found = 2
-  lostFound.find({ type: req.params.type }, function(error, data) {
+  lostFound.find({ type: req.params.type }, function (error, data) {
     if (error) {
       return res.status(500).json();
     }
@@ -41,7 +41,7 @@ export function create(req, res) {
   var object = req.body;
   object.author = auth.getUserId(req);
   var lostFoundObj = new lostFound(object);
-  lostFoundObj.save(function(error) {
+  lostFoundObj.save(function (error) {
     if (error) {
       return res.status(500).json();
     }
@@ -55,7 +55,7 @@ export function remove(req, res) {
     {
       _id: req.params.id,
     },
-    function(error) {
+    function (error) {
       if (error) {
         return res.status(500).json();
       }
@@ -72,7 +72,7 @@ export function show(req, res) {
     {
       _id: req.params.id,
     },
-    function(error, lostFound) {
+    function (error, lostFound) {
       if (error) {
         return res.status(500).json({ message: "No data found!" });
       }
@@ -80,18 +80,22 @@ export function show(req, res) {
       return res.status(200).json({
         lostFound: lostFound,
       });
-    }
-  );
+    }).sort({ createdAt: -1 });
 }
 
 export function search(req, res) {
   const query = {
     petType: { $regex: req.body.petType, $options: "i" },
-    location: { $regex: req.body.location, $options: "i" },
+    $or: [
+      { location: { $regex: req.body.search, $options: "i" } },
+      { desc: { $regex: req.body.search, $options: "i" } },
+      { personName: { $regex: req.body.search, $options: "i" } },
+      { petType: { $regex: req.body.search, $options: "i" } }
+    ],
     type: { $in: req.body.type }
   };
 
-  lostFound.find(query, function(error, lostFound) {
+  lostFound.find(query, function (error, lostFound) {
     if (error) {
       return res.status(500).json({ message: "No data found!" });
     }
@@ -99,7 +103,7 @@ export function search(req, res) {
     return res.status(200).json({
       lostFound: lostFound,
     });
-  });
+  }).sort({ createdAt: req.body.sort });
 }
 
 export function update(req, res) {
@@ -109,7 +113,7 @@ export function update(req, res) {
       ...req.body,
     },
     { new: true },
-    function(error) {
+    function (error) {
       if (error) {
         return res.status(500).json();
       }

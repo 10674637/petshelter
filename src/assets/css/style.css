@@ -190,6 +190,7 @@ strong,option{
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
+ 
 }
 
 .icon-button-group>
@@ -199,10 +200,12 @@ button{
   margin-left: 10px;
   margin-right: 10px;  
   
+  
 }
 .icon-button-group>
 button>i{
   color:#6c757d !important;   
+   
 }
 .button-group>button{
   margin: 1em;  
@@ -215,4 +218,16 @@ button>i{
  
 .card-body>p{
   color: black
+}
+.thedate{
+  color:cadetblue;
+  font-family:Verdana, Geneva, Tahoma, sans-serif;
+  float: left;
+  font-size:  4mm;
+}
+.addLostFoundPet{
+  margin: 4mm;
+}
+.addNewPet{
+  margin: 4mm;
 }

@@ -1,12 +1,5 @@
 <template>
   <div>
-    <div class=" custom-bg-dark">
-      <h3>
-        Please give us a call for adoption.
-        <br />
-        (801) 359-0990
-      </h3>
-    </div>
     <!--start - lost found pet form modal -->
     <b-modal
       id="bv-modal-example-adoption-add"
@@ -155,6 +148,7 @@
     <div class="row row-cols-1 row-cols-md-3 g-4">
       <div class="col margin" v-for="item in AllAdoption" :key="item._id">
         <div class="card h-100 padding">
+          <span class="thedate">{{ convert(item.createdAt) }}</span>
           <div class="icon-button-group">
             <button
               v-show="
@@ -236,6 +230,7 @@ import {
 import Search from "../../components/Search.vue";
 import AdoptionEdit from "../../components/AdoptionEdit";
 import imageCompression from "browser-image-compression";
+import moment from "moment";
 export default {
   name: "Adoption",
   components: {
@@ -271,10 +266,18 @@ export default {
     };
   },
   methods: {
+    convert(uploadDate){
+      return moment(uploadDate).format('MM/DD/YYYY HH:mm ')
+    },
     async onSearchClick(value) {
+       var sortType = 1;
+      if(value.sort == 'desc')
+       {sortType = -1;}
+
       let obj = {
         petType: value.petType == "-" ? "" : value.petType,
-        location: value.location,
+        search: value.search,
+        sort: sortType
       };
       console.log(obj);
       let result = await search(obj);
@@ -299,6 +302,10 @@ export default {
     },
     async getData() {
       let result = await getAllAdoption();
+      console.log('this is the result object', result.data.adoption.forEach(element => console.log(
+        element.updatedAt 
+        )
+      ))
       if (result.status == 200) {
         this.AllAdoption = result.data.adoption;
       }
@@ -349,70 +356,10 @@ export default {
         this.getData();
       }
     },
-  },
-  mounted() {
+  }, 
+mounted() {
     this.getData();
   },
 };
 </script>
-
-<style scoped>
-/* .padding {
-  padding: 1em;
-}
-.margin {
-  margin-top: 1em;
-  margin-bottom: 1em;
-}
-.form-card {
-  margin: 0 auto;
-  text-align: center;
-  position: relative;
-  top: 10%;
-  padding: 1em;
-}
-
-.btn {
-  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-  width: 250px;
-  border-radius: 12px;
-}
-.form-control {
-  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-}
-
-.close {
-  float: right;
-  color: #000;
-  text-shadow: 0 1px 0 #fff;
-  opacity: 0.5;
-}
-button-group {
-  display: flex;
-  flex-direction: row;
-}
-
-.icon-button-group {
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-end;
-}
-
-.icon-button-group > button {
-  margin-top: 5px;
-  margin-bottom: 5px;
-  margin-left: 10px;
-  margin-right: 10px;
-}
-.icon-button-group > button > i {
-  color: #6c757d !important;
-}
-.button-group > button {
-  margin: 1em;
-}
-
-.flex-container {
-  display: flex;
-  flex-wrap: wrap;
-} */
-</style>
+ 
