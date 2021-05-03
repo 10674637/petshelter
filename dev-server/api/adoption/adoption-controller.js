@@ -33,16 +33,43 @@ export function show(req, res) {
   });
 }
 
+// export function showAll(req, res) {
+//   adoption.find({}, function (error, adoption) {
+//     if (error) {
+//       return res.status(500).json({ message: "No data found!" });
+//     }
+
+//     return res.status(200).json({
+//       adoption: adoption
+//     });
+//   }).sort({ createdAt: 1 });
+// }
 export function showAll(req, res) {
+  var limit = parseInt(req.query.limit)
+  var page = parseInt(req.query.page)
+  console.log(page)
+  console.log(limit)
+  adoption.find()
+    .skip(page - 1)
+    .limit(limit)
+    .then(adoption => {
+
+      return res.status(200).json({
+        adoption: adoption
+      })
+    })
+}
+export function countAll(req, res) {
   adoption.find({}, function (error, adoption) {
     if (error) {
-      return res.status(500).json({ message: "No data found!" });
+      console.log(error)
+      return res.status(500).json({ message: error });
     }
 
     return res.status(200).json({
-      adoption: adoption
+      count: adoption.length
     });
-  }).sort({ createdAt: 1 });
+  });
 }
 
 //delete by from datase

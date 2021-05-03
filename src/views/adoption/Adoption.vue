@@ -216,6 +216,9 @@
       @updateEditObj="clearEditObj"
     />
     <!-- end- Adoption Edit modal -->
+    <div class="d-flex justify-content-center">
+      <b-btn class="button" v-on:click="load()">More Results</b-btn>
+    </div>
   </div>
 </template>
 
@@ -231,6 +234,7 @@ import Search from "../../components/Search.vue";
 import AdoptionEdit from "../../components/AdoptionEdit";
 import imageCompression from "browser-image-compression";
 import moment from "moment";
+import { http } from '../../services/HttpService'
 export default {
   name: "Adoption",
   components: {
@@ -239,6 +243,8 @@ export default {
   },
   data() {
     return {
+      totalPages: 0,
+      limit: 3,
       AllAdoption: [],
       petOptions: [
         { text: "-", value: "-" },
@@ -265,7 +271,20 @@ export default {
       },
     };
   },
+  created() {
+    http().get("/adoption/count").then(data => {
+      console.log(data)
+          this.totalPages = data.data['count'] / this.limit;
+    })
+  },
   methods: {
+    load() {
+      var page = this.AllAdoption.length + 1
+      http().get("/adoptions?page="+ page + "&limit=" + this.limit).then(data => {
+        console.log(data.data.adoption)
+            this.AllAdoption = this.AllAdoption.concat(data.data.adoption);
+      })
+    },
     convert(uploadDate){
       return moment(uploadDate).format('MM/DD/YYYY HH:mm ')
     },
@@ -301,11 +320,8 @@ export default {
       });
     },
     async getData() {
-      let result = await getAllAdoption();
-      console.log('this is the result object', result.data.adoption.forEach(element => console.log(
-        element.updatedAt 
-        )
-      ))
+      let result = await getAllAdoption(1, this.limit);
+      // let result = await getAllAdoption();
       if (result.status == 200) {
         this.AllAdoption = result.data.adoption;
       }
