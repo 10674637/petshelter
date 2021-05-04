@@ -4,11 +4,11 @@
     <form class="custom-form" v-on:submit.prevent="onSubmit">
     <div class="form-group">
         <label for="username">Username</label>
-        <input v-model="username" type="text" class="form-control" id="username" placeholder="username"/>
+        <input v-model="username" type="text" class="form-control" id="username" placeholder="username" required/>
     </div>
     <div class="form-group">
         <label for="password">Password</label>
-        <input v-model="password" type="password" class="form-control" id="password" placeholder="password"/>
+        <input v-model="password" type="password" class="form-control" id="password" placeholder="password" required/>
     </div>
     <div class="form-group">
     <button type="submit" class="btn btn-secondary">Login</button>
@@ -36,8 +36,12 @@
                     username: this.username,
                     password: this.password
                 }
-                await auth.login(user);
-                this.$router.push({name: 'home'});
+                try { 
+                    await auth.login(user);
+                     this.$router.push({name: 'home'});
+                } catch (error) {
+                    alert("Username or password is incorrect")
+                }              
             }
         }
     }

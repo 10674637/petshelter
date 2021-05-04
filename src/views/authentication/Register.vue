@@ -5,22 +5,22 @@
             <div class="form-group">
                 <label for="first">First Name</label>
                 <input v-model="first" type="text" class="form-control" 
-                id="first" placeholder="First name"/>
+                id="first" placeholder="First name" required/>
             </div>
                 <div class="form-group">
                 <label for="last">Last Name</label>
                 <input v-model="last" type="text" class="form-control" 
-                id="last" placeholder="Last Name"/>
+                id="last" placeholder="Last Name" required/>
             </div>
                 <div class="form-group">
                 <label for="username">Username</label>
                 <input v-model="username" type="text" class="form-control" 
-                id="username" placeholder="username"/>
+                id="username" placeholder="username" required/>
             </div>
             <div class="form-group">
                 <label for="password">Password</label>
                 <input v-model="password" type="password" class="form-control" 
-                id="password" placeholder="password"/>
+                id="password" placeholder="password" required/>
             </div>
             <div class="form-group">
             <button type="submit" class="btn btn-secondary">Register</button>
@@ -37,7 +37,7 @@
         name:'register',
         data: function(){
             return{
-                username: '',
+                username:'',
                 password: '',
                 first: '',
                 last:''            

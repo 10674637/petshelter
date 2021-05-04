@@ -12,6 +12,7 @@ import * as auth from '../services/AuthService'
 import AllFoundPet from '../views/postsLostAndFound/AllFoundPets.vue'
 import AllLostPet from '../views/postsLostAndFound/AllLostPets.vue'
 import Adoption from '../views/adoption/Adoption.vue'
+import AdoptionDetail from '../views/adoption/AdoptionDetail.vue'
 
 Vue.use(VueRouter)
 
@@ -20,6 +21,11 @@ const routes = [
     path: '/',
     name: 'home',
     component: Home
+  },
+  {
+    path: '/adoption/:id',
+    name: 'adoptionDetail',
+    component: AdoptionDetail
   },
 
   {
@@ -50,7 +56,7 @@ const routes = [
     name: 'posts-create',
     component: PostsCreate,
     beforeEnter: (to, from, next) => {
-      if (auth.isLoggedIn()){
+      if (auth.isLoggedIn()) {
         next();
       } else {
         next('/login');
@@ -63,7 +69,7 @@ const routes = [
     name: 'posts-edit',
     component: PostsEdit,
     beforeEnter: (to, from, next) => {
-      if (auth.isLoggedIn()){
+      if (auth.isLoggedIn()) {
         next();
       } else {
         next('/login');
@@ -76,7 +82,7 @@ const routes = [
     name: 'register',
     component: Register,
     beforeEnter: (to, from, next) => {
-      if (!auth.isLoggedIn()){
+      if (!auth.isLoggedIn()) {
         next();
       } else {
         next('/');
@@ -89,7 +95,7 @@ const routes = [
     name: 'login',
     component: Login,
     beforeEnter: (to, from, next) => {
-      if (!auth.isLoggedIn()){
+      if (!auth.isLoggedIn()) {
         console.log("NEXT")
         next();
       } else {
@@ -128,7 +134,7 @@ const routes = [
 
   {
     path: '*',
-    redirect:'/'
+    redirect: '/'
   },
 
 ]

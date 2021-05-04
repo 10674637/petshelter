@@ -1,3 +1,4 @@
+
 import { http } from './HttpService'
 
 
@@ -21,7 +22,7 @@ export function search(filter) {
 }
 
 export function updateAdoption(Adoption) {
-    return http().put(`/adoption`, Adoption);
+    return http().put(`/adoption/${Adoption._id}`, Adoption);
 }
 
 export function totalNumber() {

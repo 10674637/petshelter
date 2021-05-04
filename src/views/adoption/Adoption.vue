@@ -180,7 +180,9 @@
             </button>
           </div>
           <hr />
+          <!-- the onclick for the detail page  -->
           <img
+            v-on:click="goto(item._id)"
             v-show="item.image"
             :src="item.image"
             class="card-img-top img-card"
@@ -244,7 +246,7 @@ export default {
   data() {
     return {
       totalPages: 0,
-      limit: 2,
+      limit: 6,
       AllAdoption: [],
       petOptions: [
         { text: "-", value: "-" },
@@ -287,6 +289,10 @@ export default {
             this.AllAdoption = this.AllAdoption.concat(data.data.adoption);
       })
     },
+    goto(id) {
+      console.log(id)
+      this.$router.push('/adoption/' + id)
+    },
     convert(uploadDate){
       return moment(uploadDate).format('MM/DD/YYYY HH:mm ')
     },
@@ -323,7 +329,6 @@ export default {
     },
     async getData() {
       let result = await getAllAdoption(1, this.limit);
-      // let result = await getAllAdoption();
       if (result.status == 200) {
         this.AllAdoption = result.data.adoption;
       }
@@ -336,7 +341,7 @@ export default {
       if (result.status == 200) {
         this.clearForm();
         alert(result.data.message);
-        this.getData();
+        // this.getData();
         this.$bvModal.hide("bv-modal-example-adoption-add");
       }
     },
@@ -353,7 +358,7 @@ export default {
       let result = await updateAdoption(data);
       if (result.status == 200) {
         alert(result.data.message);
-        // this.getData();
+        this.getData();
       }
       this.clearEditObj();
     },

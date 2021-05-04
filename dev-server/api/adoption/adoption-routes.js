@@ -9,5 +9,5 @@ router.get('/adoptions', controller.showAll);
 router.get('/adoption/:id', controller.show);
 router.delete('/adoption/:id', auth.requireLogin, controller.remove);
 router.post('/adoption/search', controller.search);
-router.put('/adoption', auth.requireLogin, controller.update);
+router.put('/adoption/:id', auth.requireLogin, controller.update);
 export default router;
