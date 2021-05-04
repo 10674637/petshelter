@@ -1,21 +1,50 @@
 import lostFound from "../../model/lost-found-model.js";
 import * as auth from "../../services/auth-service.js";
-export function index(req, res) {
-  //find all pets
-  lostFound.find(function (error, data) {
-    if (error) {
-      return res.status(500).json();
-    }
+// export function index(req, res) {
+//   //find all pets
+//   lostFound.find(function (error, data) {
+//     if (error) {
+//       return res.status(500).json();
+//     }
 
-    if (!data) {
-      return res.status(404).json({ message: "No data found!" });
+//     if (!data) {
+//       return res.status(404).json({ message: "No data found!" });
+//     }
+
+//     return res.status(200).json({
+//       lostFound: data,
+//     });
+//   });
+// }
+export function index(req, res) {
+  var limit = parseInt(req.query.limit)
+  var page = parseInt(req.query.page)
+  console.log(page)
+  console.log(limit)
+  lostFound.find()
+    .skip(page - 1)
+    .limit(limit)
+    .then(lostFound => {
+      return res.status(200).json({
+        lostFound: lostFound
+      })
+    })
+}
+export function countAll(req, res) {
+  lostFound.find({}, function (error, lostFound) {
+    if (error) {
+      console.log(error)
+      return res.status(500).json({ message: error });
     }
 
     return res.status(200).json({
-      lostFound: data,
+      count: lostFound.length
     });
   });
 }
+
+
+
 
 export function getByType(req, res) {
   //find all post by type

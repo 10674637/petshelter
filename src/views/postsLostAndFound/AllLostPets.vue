@@ -3,22 +3,6 @@
     <div class="jumbotron custom-bg-dark">
       <h3>I am lost, have you seen me?</h3>
     </div>
-
-    <!-- <div class="row row-cols-1 row-cols-md-3 g-4">
-      <div class="col">
-        <div class="card h-100">
-          <img src="../../assets/ausiedog.jpg" class="card-img-top" alt="..." />
-
-          <div class="card-body">
-            <h5 class="card-title" style="color: black">Name: Benny</h5>
-            <p style="color: black">
-              Description: <br />
-              Male Aussie Dog, blue collar has tag. Lost at Lehi park.
-            </p>
-          </div>
-        </div>
-      </div> -->
-
     <div class="row row-cols-1 row-cols-md-3 g-4">
       <div class="col" v-for="item in AllLost" :key="item._id">
         <div class="card h-100">
@@ -68,7 +52,8 @@ export default {
   },
   methods: {
     async getData() {
-      let result = await getAllLostFound(1);
+      // let result = await getAllLostFound(1);
+      let result = await getAllLostFound(1,1,this.limit);
       if (result.status == 200) {
         this.AllLost = result.data.lostFound;
       }

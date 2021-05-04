@@ -202,6 +202,7 @@
       @updateEditObj="clearEditObj"
     />
     <!-- end- LostFound Edit modal -->
+    
 
     <div class="row row-cols-1 row-cols-md-3 g-4">
       <div class="col margin" v-for="item in AllPosts" :key="item._id">
@@ -288,12 +289,16 @@
         </div>
       </div>
     </div>
+    <!-- <div class="d-flex justify-content-center">
+      <b-btn class="button" v-on:click="load()">More Results</b-btn>
+    </div> -->
   </div>
 </template>
 
 <script>
 import Search from "../../components/Search.vue";
 import moment from "moment";
+import { http } from '../../services/HttpService'
 import LostFoundEdit from "../../components/LostFoundEdit.vue";
 import {
   createLostFound,
@@ -306,6 +311,9 @@ export default {
   name: "LostAndFound",
   data() {
     return {
+      totalPages: 0,
+      limit: 3,
+      
       AllPosts: [],
       LostFoundObj: {
         type: 2,
@@ -340,7 +348,23 @@ export default {
     Search,
     LostFoundEdit,
   },
+  created() {
+    http().get("/lost-found/count").then(data => {
+      console.log('what is data here',data)
+          this.totalPages = data.data['count'] / this.limit;
+           console.log('totalpage',this.totalPages)
+    })
+  },
   methods: {
+     load() {
+      //  console.log('what is in allposts', this.AllPosts)
+      var page = this.AllPosts.length + 1
+      console.log('how many pages',page)
+      http().get(`/lost-found?page`+ page + "&limit=" + this.limit).then(data => {
+        console.log('I am here testing',data.data)
+          this.AllPosts = this.AllPosts.concat(data.data.lostFound);
+      })
+    },
     convert(uploadDate){
       return moment(uploadDate).format('MM/DD/YYYY HH:mm ')
     },

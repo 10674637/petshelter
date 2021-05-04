@@ -54,7 +54,9 @@ export default {
   },
   methods: {
     async getData() {
-      let result = await getAllLostFound(2);
+       
+      // let result = await getAllLostFound(2);
+      let result = await getAllLostFound(2,1,this.limit);
       if (result.status == 200) {
         this.AllFound = result.data.lostFound;
       }

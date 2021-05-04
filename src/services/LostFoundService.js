@@ -1,7 +1,10 @@
 import { http } from './HttpService'
 
-export function getAllLostFound(id) {    
-    return http().get(`/lost-found/type/${id}`);
+// export function getAllLostFound(id) {    
+//     return http().get(`/lost-found/type/${id}`);
+// }
+export function getAllLostFound(id, page, limit) {
+    return http().get(`/lost-found/type/${id}?page=` + page + "&limit=" + limit);
 }
 
 export function getLostFoundById(id) {
@@ -18,12 +21,19 @@ export function deleteLostFound(id) {
 }
 
 export function search(filter) {
-    return http().post(`/lost-found/search`,filter);
+    return http().post(`/lost-found/search`, filter);
 }
 
 
 export function updateLostFound(LostFound) {
     return http().put('/lost-found', LostFound);
+}
+
+export function totalNumber() {
+    http().get('/lost-found/count')
+        .then(data => {
+            return data.data['count']
+        })
 }
 
 // export function updateTask(LostFound) {

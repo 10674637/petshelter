@@ -103,6 +103,9 @@ form.custom-form {
   color: white;
   text-shadow: 5px 5px 10px red;
 }
+#show-btn{
+  margin:4mm;
+}
 /* start of desktop styles */
 
 @media screen and (max-width: 991px) {
@@ -214,6 +217,7 @@ button>i{
 .flex-container{
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
 }
  
 .card-body>p{

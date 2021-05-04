@@ -11,7 +11,7 @@
       <div v-if="$store.state.isLoggedIn" class="col margin">
         <form @submit.prevent="saveData" ref="Form">
           <div class="card h-100">
-            <div class="form-card">
+            <div class="form-card-adoption">
               <div class="input-group">
                 <label
                   for="inputGroupFile"
@@ -244,7 +244,7 @@ export default {
   data() {
     return {
       totalPages: 0,
-      limit: 3,
+      limit: 2,
       AllAdoption: [],
       petOptions: [
         { text: "-", value: "-" },
@@ -275,13 +275,15 @@ export default {
     http().get("/adoption/count").then(data => {
       console.log(data)
           this.totalPages = data.data['count'] / this.limit;
+          
     })
   },
   methods: {
     load() {
       var page = this.AllAdoption.length + 1
+      console.log('this is page testing', page)
       http().get("/adoptions?page="+ page + "&limit=" + this.limit).then(data => {
-        console.log(data.data.adoption)
+        console.log('loggin the data',data.data.adoption)
             this.AllAdoption = this.AllAdoption.concat(data.data.adoption);
       })
     },
