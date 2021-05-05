@@ -246,7 +246,7 @@ export default {
   data() {
     return {
       totalPages: 0,
-      limit: 20,
+      limit: 6,
       AllAdoption: [],
       petOptions: [
         { text: "-", value: "-" },
@@ -339,7 +339,6 @@ export default {
       this.AdoptionObj.image = await this.toBase64(
         this.$refs.imageFile.files[0]
       );
-
       //Saving to database
       let result = await createAdoption(this.AdoptionObj);
 

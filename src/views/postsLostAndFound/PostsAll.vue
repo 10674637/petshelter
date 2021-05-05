@@ -175,7 +175,7 @@
       </div>
     </b-modal>
     <!--end - lost found pet form modal -->
-     
+
     <!-- start-Search components -->
     <div class="flex-container">
       <div>
@@ -183,7 +183,7 @@
           :isLostFound="true"
           @change="onSearchClick($event)"
           style="width: 100%"
-      />
+        />
       </div>
       <div v-if="$store.state.isLoggedIn">
         <b-button
@@ -202,7 +202,6 @@
       @updateEditObj="clearEditObj"
     />
     <!-- end- LostFound Edit modal -->
-    
 
     <div class="row row-cols-1 row-cols-md-3 g-4">
       <div class="col margin" v-for="item in AllPosts" :key="item._id">
@@ -298,7 +297,7 @@
 <script>
 import Search from "../../components/Search.vue";
 import moment from "moment";
-import { http } from '../../services/HttpService'
+import { http } from "../../services/HttpService";
 import LostFoundEdit from "../../components/LostFoundEdit.vue";
 import {
   createLostFound,
@@ -313,7 +312,7 @@ export default {
     return {
       totalPages: 0,
       limit: 3,
-      
+
       AllPosts: [],
       LostFoundObj: {
         type: 2,
@@ -349,24 +348,28 @@ export default {
     LostFoundEdit,
   },
   created() {
-    http().get("/lost-found/count").then(data => {
-      console.log('what is data here',data)
-          this.totalPages = data.data['count'] / this.limit;
-           console.log('totalpage',this.totalPages)
-    })
+    http()
+      .get("/lost-found/count")
+      .then((data) => {
+        console.log("what is data here", data);
+        this.totalPages = data.data["count"] / this.limit;
+        console.log("totalpage", this.totalPages);
+      });
   },
   methods: {
-     load() {
+    load() {
       //  console.log('what is in allposts', this.AllPosts)
-      var page = this.AllPosts.length + 1
-      console.log('how many pages',page)
-      http().get(`/lost-found?page`+ page + "&limit=" + this.limit).then(data => {
-        console.log('I am here testing',data.data)
+      var page = this.AllPosts.length + 1;
+      console.log("how many pages", page);
+      http()
+        .get(`/lost-found?page` + page + "&limit=" + this.limit)
+        .then((data) => {
+          console.log("I am here testing", data.data);
           this.AllPosts = this.AllPosts.concat(data.data.lostFound);
-      })
+        });
     },
-    convert(uploadDate){
-      return moment(uploadDate).format('MM/DD/YYYY HH:mm ')
+    convert(uploadDate) {
+      return moment(uploadDate).format("MM/DD/YYYY HH:mm ");
     },
     async toBase64(file) {
       const options = {
@@ -416,14 +419,15 @@ export default {
       if (value.isShowFound) type.push(2);
 
       var sortType = 1;
-      if(value.sort == 'desc')
-      {sortType = -1;}
+      if (value.sort == "desc") {
+        sortType = -1;
+      }
 
       let obj = {
         petType: value.petType == "-" ? "" : value.petType,
         search: value.search,
         type: type,
-        sort: sortType
+        sort: sortType,
       };
       console.log(obj);
       let result = await search(obj);
@@ -482,5 +486,3 @@ export default {
   },
 };
 </script>
-
- 

@@ -1,23 +1,23 @@
 <template>
-    <HelloWorld/>
+  <HelloWorld />
 </template>
 
 <script>
 // @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
+import HelloWorld from "@/components/HelloWorld.vue";
 
 export default {
-  name: 'Home',
+  name: "Home",
   components: {
-    HelloWorld
+    HelloWorld,
   },
-  beforeCreate: function(){
-    fetch(this.$store.state.apiUrl + '/user', {
-      method:'GET'
+  beforeCreate: function() {
+    fetch(this.$store.state.apiUrl + "/user", {
+      method: "GET",
     })
-    .then(res => res.json())
-    .then(res => console.log(res))
-    .catch(error => console.error(error))
-  }
-}
+      .then((res) => res.json())
+      .then((res) => console.log(res))
+      .catch((error) => console.error(error));
+  },
+};
 </script>

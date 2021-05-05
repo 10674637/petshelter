@@ -1,4 +1,3 @@
-
 import { http } from './HttpService'
 
 export function getAllAdoption(page, limit) {
