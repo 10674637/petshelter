@@ -5,8 +5,6 @@ import Login from '../views/authentication/Login.vue'
 import Register from '../views/authentication/Register.vue'
 import Donation from '../views/donation/Donation.vue'
 import PostsAll from '../views/postsLostAndFound/PostsAll.vue'
-import PostsCreate from '../views/postsLostAndFound/PostsCreate.vue'
-import PostsEdit from '../views/postsLostAndFound/PostsEdit.vue'
 import Contact from '../views/contact/Contact.vue'
 import * as auth from '../services/AuthService'
 import AllFoundPet from '../views/postsLostAndFound/AllFoundPets.vue'
@@ -50,33 +48,6 @@ const routes = [
     name: 'AllLostPet',
     component: AllLostPet
   },
-
-  {
-    path: '/posts/new',
-    name: 'posts-create',
-    component: PostsCreate,
-    beforeEnter: (to, from, next) => {
-      if (auth.isLoggedIn()) {
-        next();
-      } else {
-        next('/login');
-      }
-    }
-  },
-
-  {
-    path: '/posts/:id',
-    name: 'posts-edit',
-    component: PostsEdit,
-    beforeEnter: (to, from, next) => {
-      if (auth.isLoggedIn()) {
-        next();
-      } else {
-        next('/login');
-      }
-    }
-  },
-
   {
     path: '/register',
     name: 'register',
