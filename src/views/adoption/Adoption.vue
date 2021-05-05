@@ -246,7 +246,7 @@ export default {
   data() {
     return {
       totalPages: 0,
-      limit: 6,
+      limit: 20,
       AllAdoption: [],
       petOptions: [
         { text: "-", value: "-" },
@@ -313,6 +313,7 @@ export default {
       }
     },
     async toBase64(file) {
+      //file compression
       const options = {
         maxSizeMB: 1,
         maxWidthOrHeight: 1920,
@@ -334,14 +335,18 @@ export default {
       }
     },
     async saveData() {
+      //getting image
       this.AdoptionObj.image = await this.toBase64(
         this.$refs.imageFile.files[0]
       );
+
+      //Saving to database
       let result = await createAdoption(this.AdoptionObj);
+
       if (result.status == 200) {
         this.clearForm();
         alert(result.data.message);
-        // this.getData();
+        this.getData();
         this.$bvModal.hide("bv-modal-example-adoption-add");
       }
     },

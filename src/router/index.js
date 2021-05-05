@@ -7,8 +7,6 @@ import Donation from '../views/donation/Donation.vue'
 import PostsAll from '../views/postsLostAndFound/PostsAll.vue'
 import Contact from '../views/contact/Contact.vue'
 import * as auth from '../services/AuthService'
-import AllFoundPet from '../views/postsLostAndFound/AllFoundPets.vue'
-import AllLostPet from '../views/postsLostAndFound/AllLostPets.vue'
 import Adoption from '../views/adoption/Adoption.vue'
 import AdoptionDetail from '../views/adoption/AdoptionDetail.vue'
 
@@ -31,22 +29,10 @@ const routes = [
     name: 'posts-all',
     component: PostsAll
   },
-
-  {
-    path: '/AllFoundPet',
-    name: 'AllFoundPet',
-    component: AllFoundPet
-  },
   {
     path: '/Adoption',
     name: 'Adoption',
     component: Adoption
-  },
-
-  {
-    path: '/AllLostPet',
-    name: 'AllLostPet',
-    component: AllLostPet
   },
   {
     path: '/register',
